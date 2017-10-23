@@ -1,28 +1,27 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity FullAdder32 is
-	
-	port (
-		in_a, in_b, in_carry : in  std_logic_vector(15 downto 0);
-		out_carry            : out std_logic;
-		sum                  : out std_logic_vector(15 downto 0)
-	);
 
+entity FullAdder32 is
+	port (
+		in_a, in_b 	: in  std_logic_vector(31 downto 0);
+		in_carry		: in std_logic;
+		sum         : out std_logic_vector(31 downto 0);
+		out_carry   : out std_logic
+	);
 end entity;
+
 
 architecture bhv of FullAdder32 is
 
 	component FullAdder1 is
-		
 		port (
 			in_a, in_b, in_carry : in  std_logic;
 			sum, out_carry       : out std_logic
 		);
-	
 	end component;
 	
-	signal s : std_logic_vector(14 downto 0);
+	signal s : std_logic_vector(30 downto 0);
 	
 begin
 
