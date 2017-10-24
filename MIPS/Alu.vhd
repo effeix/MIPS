@@ -27,6 +27,7 @@ begin
     and_out <= mux_a_out and mux_b_out;
     slt_out <= (others => '0');
 	 overflow <= cout_30 xor cout_31;
+	 slt_out(0) <= fa_sum(31) xor overflow;
 	
     MUX_OPS : entity work.Mux4Way port map (slt_out, fa_sum, or_out, and_out, ctrl(1 downto 0), output);
 	
