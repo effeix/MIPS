@@ -19,8 +19,8 @@ architecture bhv of Alu is
 
 begin
 
-    MUX_A : entity work.Mux port map (in_a, not(in_a), ctrl(3), mux_a_out);
-    MUX_B : entity work.Mux port map (in_b, not(in_b), ctrl(2), mux_b_out);
+    MUX_A : entity work.Mux2Way port map (in_a, not(in_a), ctrl(3), mux_a_out);
+    MUX_B : entity work.Mux2Way port map (in_b, not(in_b), ctrl(2), mux_b_out);
     FULL_ADDER : entity work.FullAdder32 port map (mux_a_out, mux_b_out, ctrl(2), fa_sum, cout_30, cout_31);
 	
     or_out <= mux_a_out or mux_b_out;
