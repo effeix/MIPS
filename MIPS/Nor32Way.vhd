@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 --use ieee.numeric_std.all;
 use ieee.std_logic_misc.all;
 
-entity Nor32 is
+entity Nor32Way is
 	
 	port (
 		in_a   : in  std_logic_vector(31 downto 0);
@@ -12,7 +12,7 @@ entity Nor32 is
 
 end entity;
 
-architecture bhv of Nor32 is
+architecture bhv of Nor32Way is
 
 	signal result : std_logic := '0';
 
