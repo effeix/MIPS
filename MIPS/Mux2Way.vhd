@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 
-entity Mux is
+entity Mux2Way is
 	port ( 
 		in_a, in_b : in std_logic_vector(31 downto 0);
 		sel  : in std_logic;
@@ -11,7 +11,7 @@ entity Mux is
 end entity;
 
 
-architecture bhv of Mux is
+architecture bhv of Mux2Way is
 begin
 	
 	process(in_a, in_b, sel)
