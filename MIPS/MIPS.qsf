@@ -50,6 +50,7 @@ set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
 set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 2
 set_global_assignment -name VHDL_FILE Mux4Way.vhd
 set_global_assignment -name VHDL_FILE Mux.vhd
 set_global_assignment -name VHDL_FILE Alu.vhd
