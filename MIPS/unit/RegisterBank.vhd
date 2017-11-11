@@ -13,10 +13,10 @@ entity RegisterBank is
 	port
 	(
 		clk        					  : in std_logic;
-		addr_r1, addr_r2, addr_r3   : in natural range 0 to 2**ADDR_WIDTH-1;
-		data_r3							  : in std_logic_vector((DATA_WIDTH -1) downto 0);
+		addr_r1, addr_r2, addr_r3 : in natural range 0 to 2**ADDR_WIDTH-1;
+		data_r3						  : in std_logic_vector((DATA_WIDTH -1) downto 0);
 		we_r3							  : in std_logic;
-		read_r1, read_r2            : out std_logic_vector((DATA_WIDTH -1) downto 0)
+		read_r1, read_r2          : out std_logic_vector((DATA_WIDTH -1) downto 0)
 	);
 end entity;
 

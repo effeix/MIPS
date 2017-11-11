@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 
-entity register_unit is 
+entity RegisterUnit is 
 	port(
 		d   : in std_logic_vector(31 downto 0);
 		we  : in std_logic;
@@ -13,7 +13,7 @@ entity register_unit is
 end entity;
 
 
-architecture bhv of register_unit is
+architecture bhv of RegisterUnit is
 begin
 
 	process(clk, clr)
