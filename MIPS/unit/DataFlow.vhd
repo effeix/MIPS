@@ -6,8 +6,15 @@ use ieee.numeric_std.all;
 entity DataFlow is
 	port( 
 		clk   :   in std_logic;
-		df_ctrl :   in std_logic_vector(9 downto 0);
-		opcode  : out std_logic_vector(5 downto 0)
+		df_ctrl : in std_logic_vector(9 downto 0);
+		opcode  : out std_logic_vector(5 downto 0);
+		
+		--saidas de teste p; debug
+		memout : out std_logic_vector(31 downto 0);
+		alu_out1 : out std_logic_vector(31 downto 0);
+		r1_data_out, r2_data_out : out std_logic_vector(31 downto 0);
+		rs,rt,rd  : out std_logic_vector(4 downto 0)
+		
 	);
 end entity;
 
@@ -41,7 +48,7 @@ begin
 	
 	PC_INCREMENTER : entity work.FullAdder32 
 	port map (
-		in_a => "00000000000000000000000000000100", 
+		in_a => "00000000000000000000000000000001", 
 		in_b => pc_out, 
 		in_carry => '0', 
 		sum => pc_inc_out, 
@@ -71,7 +78,7 @@ begin
 		clk => clk,
 		addr_r1 => to_integer(unsigned(instruction(25 downto 21))), --Rs
 		addr_r2 => to_integer(unsigned(instruction(20 downto 16))), --Rt
-		addr_r3 => to_integer(unsigned(mux2_out)),
+		addr_r3 => to_integer(unsigned(mux2_out)), --Rt/Rd
 		data_r3 => mux4_out,
 		we_r3 => df_ctrl(7),
 		read_r1 => r1_data, 
@@ -88,9 +95,9 @@ begin
 	
 	CUALU : entity work.CUAlu
 	port map (
-		ula_op => df_ctrl(1 downto 0), 
+		alu_op => df_ctrl(1 downto 0), 
 		funct => instruction(5 downto 0),
-		ula_ctrl => alu_ctrl
+		alu_ctrl => alu_ctrl
 	);
 	
 	ALU : entity work.Alu
@@ -140,10 +147,21 @@ begin
 	port map (
 		in_a => alu_out,
 		in_b => ram_data,
-		sel => is_zero and df_ctrl(5), 
+		sel => df_ctrl(5), 
 		output => mux4_out
 	);
 	
 	opcode <= instruction(31 downto 26);
+	
+	--saidas de teste para debug
+	rs <= instruction(25 downto 21);
+	rt <= instruction(20 downto 16);
+   rd <= instruction(15 downto 11);
+	memout <= ram_data;
+	alu_out1 <= alu_out;
+	r1_data_out <= r1_data;
+	r2_data_out <= r2_data;
+	
+	
 	
 end architecture;

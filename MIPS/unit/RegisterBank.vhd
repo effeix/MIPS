@@ -1,7 +1,5 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_arith.all;
-
 
 entity RegisterBank is
 	generic 
@@ -28,21 +26,61 @@ architecture bhv of RegisterBank is
 	type memory_t is array(2**ADDR_WIDTH-1 downto 0) of word_t;
 
 	-- Declare the RAM signal.	
-	signal regs : memory_t;
+	signal regs : memory_t := (
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000000",
+		x"00000007",
+		x"00000006",
+		x"00000005",
+		x"00000004",
+		x"00000003",
+		x"00000002",
+		x"00000001",
+		x"00000000"
+	);
 
 	begin
+	
+	
 
 	process(clk)
 	begin
 		if(rising_edge(clk)) then
 			if (we_r3 = '1') then
-			regs(addr_r3) <= data_r3;
+				regs(addr_r3) <= data_r3;
+				
+				
 			end if;
-		end if;
-
-		read_r1 <= regs(addr_r1);
-
-		read_r2 <= regs(addr_r2);
+		end if;	
 
 	end process;
+	
+	read_r1 <= regs(addr_r1);
+
+	read_r2 <= regs(addr_r2);
+	
+	
+
 end architecture;
