@@ -47,7 +47,7 @@ begin
 	
 		begin
 			if(rising_edge(clk)) then
-				q <= rom(addr);
+				q <= rom(addr/4);
 			end if;
 		end process;
 		

@@ -48,7 +48,7 @@ begin
 	
 	PC_INCREMENTER : entity work.FullAdder32 
 	port map (
-		in_a => "00000000000000000000000000000001", 
+		in_a => "00000000000000000000000000000100", 
 		in_b => pc_out, 
 		in_carry => '0', 
 		sum => pc_inc_out, 
