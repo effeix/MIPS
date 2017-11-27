@@ -21,11 +21,9 @@ end entity;
 
 architecture bhv of RegisterBank is
 
-	-- Build a 2-D array type for the RAM
 	subtype word_t is std_logic_vector((DATA_WIDTH-1) downto 0);
 	type memory_t is array(2**ADDR_WIDTH-1 downto 0) of word_t;
 
-	-- Declare the RAM signal.	
 	signal regs : memory_t := (
 		x"00000000",
 		x"00000000",
@@ -61,26 +59,21 @@ architecture bhv of RegisterBank is
 		x"00000000"
 	);
 
-	begin
+begin
 	
-	
-
 	process(clk)
 	begin
+	
 		if(rising_edge(clk)) then
 			if (we_r3 = '1') then
-				regs(addr_r3) <= data_r3;
-				
-				
+				regs(addr_r3) <= data_r3;	
 			end if;
-		end if;	
-
+		end if;
+		
 	end process;
 	
 	read_r1 <= regs(addr_r1);
 
 	read_r2 <= regs(addr_r2);
-	
-	
 
 end architecture;

@@ -43,23 +43,16 @@ architecture bhv of RomUnit is
 
 begin
 
-	process(clk)
+	q <= rom(addr/4);
+
 	
-		begin
-			if(rising_edge(clk)) then
-				q <= rom(addr/4);
-			end if;
-		end process;
-		
-	--OBS:
-	--Testes de instrucoes R (add e sub), LW e SW bem sucedidas (ler abaixo para mais detalhes)
-	--Add de dois registradores iguais deixa tudo maluco
-	--Modificar PC para contar de 4 em 4 (estudar isso)
-		
-	rom(0) <= "00000000001000100101000000100000"; --rb(10)= add rb(1), rb(2)  --OK
-	rom(1) <= "00000000011001000101100000100010"; --rb(11)= sub rb(3), rb(4)  --OK
-	rom(2) <= "10101100000010100000000000000000"; --sw rb(r[10]) em m(r[0])  --OK (aparece x no lugar de zero)
-	rom(3) <= "10101100001010110000000000000000"; --sw rb(r[11]) em m(r[1]) --OK
-	rom(4) <= "10001101010000000000000000000000"; --lw m(0) --OK
+	rom(0) <= "00000000001000100101000000100000"; --rb(10) = add rb(1), rb(2)  --OK
+	rom(1) <= "00000000011001000101100000100010"; --rb(11) = sub rb(3), rb(4)  --OK
+	rom(2) <= "10101100101001110000000000000000"; --sw em memoria(r[5]=5) o valor de r[7]=7
+	rom(3) <= "10001100101010000000000000000000"; --lw da memoria(r[5]=5) o valor em r[8]
+	rom(4) <= "00000000110001010110100000101010"; --slt rb(6)=6,  rb(5)=5 guarda em rb(13)
+	rom(5) <= "00000000110001010110100000100101"; --or rb(6)=6,  rb(5)=5 guarda em rb(13)
+	rom(6) <= "00000000110001010110100000100100"; --and rb(6)=6,  rb(5)=5 guarda em rb(13)
+	rom(7) <= "00001000000000000000000000000000"; --jmp 0x00000000
 	
 end architecture;

@@ -13,8 +13,10 @@ entity DataFlow is
 		memout : out std_logic_vector(31 downto 0);
 		alu_out1 : out std_logic_vector(31 downto 0);
 		r1_data_out, r2_data_out : out std_logic_vector(31 downto 0);
-		rs,rt,rd  : out std_logic_vector(4 downto 0)
-		
+		rs,rt,rd  : out std_logic_vector(4 downto 0);
+		mux1_out_d  : out std_logic_vector(31 downto 0);
+		in_a_mux1_d  : out std_logic_vector(31 downto 0);
+		sel_mux1_d : out std_logic
 	);
 end entity;
 
@@ -59,7 +61,7 @@ begin
 	MUX1 : entity work.Mux2Way --mux PC+4,beq/Jmp
 	port map (
 		in_a => mux5_out, 
-		in_b => pc_out(31 downto 28) & instruction(25 downto 0) & "00", 
+		in_b => pc_inc_out(31 downto 28) & instruction(25 downto 0) & "00", 
 		sel => df_ctrl(9), 
 		output => mux1_out
 	);
@@ -161,7 +163,8 @@ begin
 	alu_out1 <= alu_out;
 	r1_data_out <= r1_data;
 	r2_data_out <= r2_data;
-	
-	
+	mux1_out_d <= mux1_out;
+	in_a_mux1_d <= pc_out;
+	sel_mux1_d <= df_ctrl(9);
 	
 end architecture;
