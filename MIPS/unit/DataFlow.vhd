@@ -119,7 +119,7 @@ begin
 	FA32 : entity work.FullAdder32 
 	port map (
 		in_a => pc_inc_out, 
-		in_b => "0000000000000000" & instruction(15 downto 0), 
+		in_b => "00000000000000" & instruction(15 downto 0) & "00", 
 		in_carry => '0', 
 		sum => pc_sigext, 
 		cout_30 => open, 
